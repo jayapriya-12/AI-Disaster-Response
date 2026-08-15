@@ -1,0 +1,26 @@
+{
+  "name": "ai-disaster-response-system",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AI-Powered Disaster Response and Relief Management System",
+  "scripts": {
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build": "cd backend && npm run build && cd ../frontend && npm run build",
+    "db:generate": "cd backend && npx prisma generate",
+    "db:push": "cd backend && npx prisma db push",
+    "db:seed": "cd backend && npm run db:seed"
+  },
+  "keywords": [
+    "disaster-response",
+    "ai",
+    "react",
+    "express",
+    "prisma",
+    "postgresql",
+    "typescript"
+  ],
+  "author": "",
+  "license": "ISC"
+}

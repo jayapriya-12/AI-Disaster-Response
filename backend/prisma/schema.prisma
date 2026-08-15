@@ -1,0 +1,100 @@
+// Prisma schema for AI-Powered Disaster Response and Relief Management System
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite" // Set to "postgresql" for PostgreSQL deployments (Neon / Supabase / Render)
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  phone     String
+  password  String
+  role      String   @default("USER") // ADMIN, RESPONDER, USER
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  reports     DisasterReport[]
+  assignments ResponseAssignment[]
+  disasters   Disaster[]           @relation("ReportedDisasters")
+}
+
+model Disaster {
+  id           String   @id @default(uuid())
+  title        String
+  description  String
+  type         String   // Flood, Cyclone, Earthquake, Fire, Landslide, Tsunami, Other
+  severity     String   @default("Medium") // Low, Medium, High, Critical
+  location     String
+  latitude     Float
+  longitude    Float
+  status       String   @default("Pending") // Pending, Verified, Active, Resolved, Rejected
+  reportedById String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  reportedBy  User?                @relation("ReportedDisasters", fields: [reportedById], references: [id])
+  reports     DisasterReport[]
+  assignments ResponseAssignment[]
+}
+
+model DisasterReport {
+  id          String   @id @default(uuid())
+  disasterId  String?
+  userId      String
+  description String
+  location    String
+  latitude    Float
+  longitude   Float
+  imageUrl    String?
+  status      String   @default("Pending") // Pending, Verified, Rejected
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  disaster Disaster? @relation(fields: [disasterId], references: [id], onDelete: SetNull)
+}
+
+model Shelter {
+  id               String   @id @default(uuid())
+  name             String
+  location         String
+  latitude         Float
+  longitude        Float
+  capacity         Int
+  currentOccupancy Int      @default(0)
+  contactNumber    String
+  status           String   @default("OPEN") // OPEN, FULL, CLOSED
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model ReliefResource {
+  id        String   @id @default(uuid())
+  name      String
+  category  String   // Food, Water, Medicine, Blankets, Clothing, Emergency Kits, Other
+  quantity  Int
+  unit      String   // kg, liters, boxes, units, packs
+  location  String
+  status    String   @default("AVAILABLE") // AVAILABLE, LOW, OUT_OF_STOCK
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ResponseAssignment {
+  id          String    @id @default(uuid())
+  disasterId  String
+  responderId String
+  status      String    @default("Assigned") // Assigned, In Progress, Completed
+  notes       String?
+  assignedAt  DateTime  @default(now())
+  completedAt DateTime?
+
+  disaster  Disaster @relation(fields: [disasterId], references: [id], onDelete: Cascade)
+  responder User     @relation(fields: [responderId], references: [id], onDelete: Cascade)
+}
