@@ -1,221 +1,313 @@
-# AI-Powered Disaster Response and Relief Management System
+# 🚨 AI-Powered Disaster Response and Relief Management System
 
-A production-ready full-stack web application designed for emergency disaster reporting, responder assignment, shelter occupancy tracking, relief supply management, and AI-assisted severity classification.
+An AI-powered web-based platform designed to support faster, organized, and data-driven disaster response and relief management.
 
----
+## 📌 About the Project
 
-## 🌟 Features Overview
+During disasters such as floods, cyclones, earthquakes, and other emergencies, managing information, shelters, relief resources, disaster reports, and response teams can be challenging.
 
-- **Login First & Auth Flow**: Initial load directs immediately to `/login`. Secure authentication powered by JWT and bcrypt password hashing.
-- **Role-Based Access Control (RBAC)**:
-  - **ADMIN**: Monitor all operations, manage disasters, dispatch responders, verify citizen reports, manage shelters and relief resources.
-  - **RESPONDER**: View assigned rescue tasks, update mission status (`Assigned` -> `In Progress` -> `Completed`), log operational field notes.
-  - **USER**: Report disaster incidents, track report verification status, locate nearby shelters, view active disaster alerts.
-- **AI Intelligence Hub**:
-  - **Severity Prediction Engine**: Analyzes report descriptions and emergency keywords to output severity (`Low`, `Medium`, `High`, `Critical`) with confidence scores.
-  - **Report Prioritization Matrix**: Ranks pending reports based on risk levels and keyword triggers.
-  - **Relief Supply Allocator**: Calculates recommended water, food, medical kit, tent, and blanket allocations based on affected population size.
-- **Interactive Leaflet Maps**: Real-time geolocation pin plotting for disaster events, emergency shelters, and responder mission locations.
-- **Shelter & Relief Inventory**: Capacity progress indicators, live occupancy controls, and inventory stock tracking.
+The **AI-Powered Disaster Response and Relief Management System** provides a centralized platform where disaster-related activities can be managed in one place.
 
----
+The system helps users and response teams to report disasters, manage disaster information, manage emergency shelters, track relief resources, assign responders, and generate AI-based insights.
 
-## 🏗️ Architecture
+## 🎯 Objectives
 
-```text
-                 ┌──────────────────────────────────────┐
-                 │       FRONTEND (Vite + React)        │
-                 │ TypeScript, Tailwind CSS, Lucide,   │
-                 │ React Router, Axios, Leaflet Maps    │
-                 └──────────────────┬───────────────────┘
-                                    │
-                              Axios HTTP / API
-                                    │
-                                    ▼
-                 ┌──────────────────────────────────────┐
-                 │      BACKEND (Node.js + Express)     │
-                 │ TypeScript, JWT Auth, Express Validator│
-                 │ Controller-Service Architecture      │
-                 └──────────────────┬───────────────────┘
-                                    │
-                             Prisma ORM
-                                    │
-                                    ▼
-                 ┌──────────────────────────────────────┐
-                 │       POSTGRESQL / SQLITE DATABASE   │
-                 │ Users, Disasters, Reports, Shelters,  │
-                 │ Relief Resources, Assignments        │
-                 └──────────────────────────────────────┘
-```
+- Provide a centralized disaster management platform
+- Enable users to report disasters quickly
+- Manage disaster information efficiently
+- Manage emergency shelters and their availability
+- Track relief resources such as food, water, and medicines
+- Assign responders to disaster-related tasks
+- Provide AI-based insights for better decision-making
+- Store and manage data using a centralized database
+- Provide secure authentication and access control
 
----
+## ✨ Key Features
 
-## 🛠️ Technology Stack
+### 🔐 User Authentication
+- User registration
+- User login
+- JWT-based authentication
+- Password hashing
+- Protected API routes
 
-- **Frontend**: React 18, TypeScript, Vite, Tailwind CSS, Lucide Icons, Axios, Leaflet / React-Leaflet
-- **Backend**: Node.js, Express.js, TypeScript, REST APIs, JWT, BcryptJS, Express Validator, Cors
-- **Database**: PostgreSQL (Neon / Supabase compatible) or SQLite (Zero-config local mode), Prisma ORM
-- **Deployment**: Vercel (Frontend), Render (Backend), Docker Compose
+### 🚨 Disaster Reporting
+Users can report disasters by providing:
+- Disaster type
+- Location
+- Severity
+- Description
+- Other relevant information
 
----
+### 📊 Disaster Management
+- View reported disasters
+- Manage disaster information
+- Track disaster situations
+- Support disaster response activities
 
-## 📁 Monorepo Folder Structure
+### 🏠 Shelter Management
+- Add and manage emergency shelters
+- Store shelter details
+- Track shelter capacity and availability
+- Support evacuation planning
 
-```text
+### 📦 Relief Resource Management
+The system helps manage important relief resources such as:
+- Food
+- Water
+- Medicines
+- Emergency supplies
+- Other essential materials
+
+### 👥 Responder Assignment
+- Manage responders
+- Assign responders to disaster situations
+- Track assignments
+- Improve coordination during emergencies
+
+### 🤖 AI Insights
+The system includes an AI-based module to analyze disaster-related information and provide useful insights that can support disaster response and decision-making.
+
+## 🏗️ System Architecture
+
+User
+↓
+React Frontend
+↓
+REST API
+↓
+Node.js + Express Backend
+↓
+Prisma ORM
+↓
+PostgreSQL Database
+↓
+AI Insights Module
+
+## 🛠️ Technologies Used
+
+### Frontend
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- Axios
+- React Router
+
+### Backend
+- Node.js
+- Express.js
+- TypeScript
+- JWT
+- bcryptjs
+- Express Validator
+- CORS
+
+### Database
+- PostgreSQL
+- Prisma ORM
+
+### Deployment
+- Frontend: Vercel
+- Backend: Render
+
+## 📁 Project Structure
+
 AI-Disaster-Response/
+│
 ├── frontend/
 │   ├── src/
-│   │   ├── components/       # Reusable UI cards, badges, modals & maps
-│   │   ├── context/          # AuthContext for session management
-│   │   ├── layouts/          # MainLayout with header & responsive sidebar
-│   │   ├── pages/            # Login, Register, Dashboard, Disasters, Shelters, AI
-│   │   ├── services/         # Axios centralized API client
-│   │   ├── types/            # TypeScript interfaces
-│   │   ├── App.tsx           # Router with ProtectedRoute guards
-│   │   └── main.tsx
+│   │   ├── components/
+│   │   ├── context/
+│   │   ├── layouts/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   └── types/
 │   ├── package.json
-│   ├── vite.config.ts
-│   └── vercel.json
+│   └── vite.config.ts
+│
 ├── backend/
-│   ├── src/
-│   │   ├── config/           # Prisma client DB connection
-│   │   ├── controllers/      # Auth, Disaster, Report, Shelter, Resource, AI
-│   │   ├── middleware/       # AuthMiddleware & ErrorHandler
-│   │   ├── routes/           # REST API endpoints
-│   │   ├── utils/            # JWT helpers
-│   │   └── server.ts         # Express server entry point
 │   ├── prisma/
-│   │   ├── schema.prisma     # Prisma models
-│   │   └── seed.ts           # Admin, Responders, & sample data seed
-│   ├── package.json
-│   └── tsconfig.json
+│   │   ├── schema.prisma
+│   │   └── seed.ts
+│   │
+│   ├── src/
+│   │   ├── config/
+│   │   ├── controllers/
+│   │   ├── middleware/
+│   │   ├── routes/
+│   │   ├── utils/
+│   │   └── server.ts
+│   │
+│   └── package.json
+│
 ├── docker-compose.yml
+├── package.json
 ├── render.yaml
 └── README.md
-```
 
----
+## 🔄 Application Workflow
 
-## 🚀 Quick Local Setup Guide
+1. User registers or logs into the system.
+2. User accesses the dashboard.
+3. A disaster can be reported with important details.
+4. Disaster information is stored in the database.
+5. Response teams can manage reported disasters.
+6. Emergency shelters can be managed.
+7. Relief resources can be tracked and managed.
+8. Responders can be assigned to disaster-related tasks.
+9. AI-based insights can be used to support decision-making.
 
-### 1. Install Dependencies
+## 🔑 Environment Variables
 
-In the root directory, run:
+### Backend
 
-```bash
-npm run install:all
-```
+Create a `.env` file inside the `backend` folder:
 
-Or install in each directory individually:
+PORT=5000
+DATABASE_URL=your_postgresql_database_url
+JWT_SECRET=your_jwt_secret
+FRONTEND_URL=http://localhost:5173
 
-```bash
-cd backend && npm install
-cd ../frontend && npm install
-```
+### Frontend
 
-### 2. Setup Database & Seed Data
+Create a `.env` file inside the `frontend` folder:
 
-Generate Prisma client and populate database with default records:
+VITE_API_URL=http://localhost:5000/api
 
-```bash
-cd backend
+> Never upload `.env` files containing passwords, database URLs, API keys, or other secrets to GitHub.
+
+## 🚀 Run Locally
+
+### Clone the repository
+
+git clone https://github.com/jayapriya-12/AI-Disaster-Response.git
+
+cd AI-Disaster-Response
+
+### Install frontend dependencies
+
+cd frontend
+npm install
+
+### Install backend dependencies
+
+cd ../backend
+npm install
+
+### Setup Prisma
+
 npx prisma generate
 npx prisma db push
-npm run db:seed
-```
 
-#### Default Seed Accounts for Testing:
-- **Admin**: `admin@example.com` / `AdminPassword123!`
-- **Responder**: `responder1@disaster.gov` / `Responder123!`
-- **Citizen User**: `user@example.com` / `User12345!`
+### Start backend
 
-*(Note: The login screen also features quick 1-click auto-fill buttons for instant testing).*
-
-### 3. Start Backend Server
-
-```bash
-cd backend
 npm run dev
-```
 
-Backend will start on: `http://localhost:5000`  
-Health check endpoint: `http://localhost:5000/api/health`
+Backend:
 
-### 4. Start Frontend Client
+http://localhost:5000
 
-In a separate terminal window:
+Health Check:
 
-```bash
+http://localhost:5000/api/health
+
+### Start frontend
+
+Open another terminal:
+
 cd frontend
 npm run dev
-```
 
-Frontend will start on: `http://localhost:5173`
+Frontend:
 
----
+http://localhost:5173
 
-## 📡 REST API Documentation
+## 🔗 API Modules
 
-| Method | Endpoint | Access | Description |
-| :--- | :--- | :--- | :--- |
-| **GET** | `/api/health` | Public | System status check |
-| **POST** | `/api/auth/register` | Public | Register new user (USER role only) |
-| **POST** | `/api/auth/login` | Public | Authenticate user & return JWT |
-| **GET** | `/api/auth/me` | Authenticated | Fetch current user session |
-| **POST** | `/api/auth/logout` | Authenticated | End active session |
-| **GET** | `/api/disasters` | Authenticated | List all disasters with filters |
-| **POST** | `/api/disasters` | Admin | Create new disaster event |
-| **PUT** | `/api/disasters/:id` | Admin/Responder | Update disaster details/status |
-| **GET** | `/api/reports` | Authenticated | List disaster reports |
-| **POST** | `/api/reports` | Authenticated | Submit new emergency report |
-| **PUT** | `/api/reports/:id/verify`| Admin/Responder | Mark report as Verified or Rejected |
-| **GET** | `/api/shelters` | Authenticated | List all shelters and occupancy |
-| **POST** | `/api/shelters` | Admin | Add new shelter |
-| **PUT** | `/api/shelters/:id` | Admin/Responder | Update shelter details/occupancy |
-| **GET** | `/api/resources` | Authenticated | View relief supply inventory |
-| **POST** | `/api/resources` | Admin | Add relief resource item |
-| **GET** | `/api/assignments` | Admin/Responder | View responder dispatch board |
-| **POST** | `/api/assignments` | Admin | Dispatch responder to incident |
-| **PUT** | `/api/assignments/:id` | Admin/Responder | Update response status log |
-| **POST** | `/api/ai/predict-severity`| Authenticated | AI Severity Prediction Engine |
-| **GET** | `/api/ai/prioritize-reports`| Authenticated| AI Report Prioritization Ranking |
-| **POST** | `/api/ai/recommend-relief`| Authenticated | AI Relief Supply Allocator |
+The backend contains APIs for:
 
----
+- `/api/auth`
+- `/api/users`
+- `/api/disasters`
+- `/api/reports`
+- `/api/shelters`
+- `/api/resources`
+- `/api/assignments`
+- `/api/ai`
 
-## 🌐 Production Deployment Guide
+Health Check:
 
-### Backend Deployment (Render)
+`GET /api/health`
 
-1. Connect your repository to **Render**.
-2. Select **Web Service** and choose the `backend` subfolder as Root Directory.
-3. Build Command: `npm install && npx prisma generate && npm run build`
-4. Start Command: `npm start`
-5. Set Environment Variables:
-   - `PORT`: `5000`
-   - `DATABASE_URL`: Your PostgreSQL connection string (Neon / Supabase)
-   - `JWT_SECRET`: A secure secret string
-   - `FRONTEND_URL`: Your deployed Vercel frontend URL
+Example response:
 
-### Frontend Deployment (Vercel)
+{
+  "status": "OK",
+  "message": "AI Disaster Response Backend is running"
+}
 
-1. Connect your repository to **Vercel**.
-2. Set Root Directory to `frontend`.
-3. Set Framework Preset to **Vite**.
-4. Set Environment Variables:
-   - `VITE_API_URL`: `https://YOUR-BACKEND-URL.onrender.com/api`
-5. Deploy.
+## 🌐 Deployment
 
----
+### Frontend
 
-## 📋 Verification & Testing Checklist
+The frontend is deployed using Vercel.
 
-- [x] Login page is the default initial page on app launch.
-- [x] Public registration forces `USER` role and prohibits unauthorized Admin creation.
-- [x] Seed script initializes Admin (`admin@example.com`), Responders, Shelters, and Disasters.
-- [x] JWT token is attached via Axios interceptor on every API call.
-- [x] Admin dashboard presents KPI cards, pending reports queue, and interactive map.
-- [x] User dashboard presents submitted reports status and nearby shelter locator.
-- [x] Responder dashboard presents assigned missions and status updater.
-- [x] Disaster severity prediction engine analyzes report description and outputs risk levels.
-- [x] Full build verification (`npm run build` for backend and frontend) compiles cleanly.
+The frontend communicates with the deployed backend using:
+
+VITE_API_URL=https://your-backend-url.onrender.com/api
+
+### Backend
+
+The backend is deployed using Render.
+
+Required environment variables:
+
+DATABASE_URL=your_postgresql_database_url
+JWT_SECRET=your_jwt_secret
+FRONTEND_URL=https://your-frontend-url.vercel.app
+
+## 🔒 Security
+
+The system uses:
+
+- JWT authentication
+- bcrypt password hashing
+- Protected API routes
+- Input validation
+- CORS configuration
+- Environment variables for sensitive information
+
+## 🔮 Future Enhancements
+
+- Real-time disaster alerts
+- Live disaster maps
+- GPS-based location tracking
+- Weather API integration
+- SMS and email emergency notifications
+- Advanced AI-based disaster prediction
+- AI-based resource optimization
+- Real-time responder tracking
+- Multi-language support
+- Mobile application
+- Integration with government emergency services
+
+## 🎓 Project Information
+
+**Project Title:** AI-Powered Disaster Response and Relief Management System
+
+**Domain:** Artificial Intelligence, Disaster Management, Web Application
+
+**Frontend:** React + TypeScript
+
+**Backend:** Node.js + Express + TypeScript
+
+**Database:** PostgreSQL
+
+**ORM:** Prisma
+
+**Deployment:** Vercel + Render
+
+## 📄 License
+
+This project is developed for educational and project demonstration purposes.
