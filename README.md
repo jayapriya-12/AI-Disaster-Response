@@ -311,3 +311,12 @@ The system uses:
 ## 📄 License
 
 This project is developed for educational and project demonstration purposes..
+
+👩‍💻 Developed By
+Jayapriya R
+
+B.Tech – Computer Science and Business Systems (CSBS)
+
+VSB Engineering College, Karur
+
+Academic Year: 2026–2027
