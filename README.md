@@ -310,4 +310,4 @@ The system uses:
 
 ## 📄 License
 
-This project is developed for educational and project demonstration purposes.
+This project is developed for educational and project demonstration purposes..
