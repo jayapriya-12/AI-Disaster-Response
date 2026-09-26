@@ -4,7 +4,7 @@ An AI-powered web-based platform designed to support faster, organized, and data
 
 ## 📌 About the Project
 
-During disasters such as floods, cyclones, earthquakes, and other emergencies, managing information, shelters, relief resources, disaster reports, and response teams can be challenging..
+During disasters such as floods, cyclones, earthquakes, and other emergencies, managing information, shelters, relief resources, disaster reports, and response teams can be challenging.
 
 The **AI-Powered Disaster Response and Relief Management System** provides a centralized platform where disaster-related activities can be managed in one place.
 
