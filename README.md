@@ -56,7 +56,7 @@ The system helps manage important relief resources such as:
 - Food
 - Water
 - Medicines
-- Emergency supplies
+- Emergency suplies
 - Other essential materials
 
 ### 👥 Responder Assignment
